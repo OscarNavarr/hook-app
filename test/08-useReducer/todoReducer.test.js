@@ -42,16 +42,12 @@ describe ('Pruebas en todoReducer', () => {
         
         const action = {
             type: '[TODO] Remove Todo',
-            payload: {
-                id: 2,
-                description: 'Nuevo todo #2',
-                done: false
-            }
+            payload: 1
         };
 
         const newState = todoReducer( initialState, action);
         
-        expect( newState.length ).toBe( 1 );
+        expect( newState.length ).toBe( 0 );
 
     });
 
@@ -60,22 +56,15 @@ describe ('Pruebas en todoReducer', () => {
         
         const action = {
             type: '[TODO] Toggle Todo',
-            payload: {
-                id: 1,
-                description: 'Demo Todo',
-                done: false
-            }
+            payload: 1
         };
 
-        const newState = todoReducer( initialState, action);
-        
-        /**
-         * 
-         * Este test tiene problema en la proxima clase se soluciona 
-         * # de la clase 170
-         * section 12
-         */
-        expect( newState ).toBe( true  );
+        const newState = todoReducer( initialState, action );
+        expect( newState[0].done ).toBe( true  );
+
+        const newState2 = todoReducer( newState, action );
+        expect( newState2[0].done ).toBe( false  );
+       
 
     })
 });
